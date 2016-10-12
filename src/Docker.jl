@@ -29,7 +29,8 @@ function create_container(
         volumeDriver = "",
         portBindings = ["",""], # [ContainerPort,HostPort]
         ports        = [],
-        pwd          = ""
+        pwd          = "",
+        networkMode  = "bridge",
     )
 
     url = docker_uri(host)
@@ -50,7 +51,8 @@ function create_container(
                 string(portBindings[1],"/tcp") => [
                     Dict("HostPort" => string(portBindings[2]))
                 ]
-            )
+            ),
+            "NetworkMode"  => networkMode,
         )
     )
 
